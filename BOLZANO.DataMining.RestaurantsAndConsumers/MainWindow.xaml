@@ -1,0 +1,15 @@
+﻿<Window x:Class="BOLZANO.DataMining.RestaurantsAndConsumers.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:objectModel="clr-namespace:BOLZANO.DataMining.RestaurantsAndConsumers.ViewModel"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.DataContext>
+            <objectModel:RestaurantsAndConsumers16 />
+        </Grid.DataContext>
+        
+        <DataGrid>
+            
+        </DataGrid>
+    </Grid>
+</Window>
