@@ -62,23 +62,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ContextBase.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\RestaurantCustomersEntity.cs" />
     <Compile Include="Model\RestaurantCustomersUserProfileEntity.cs" />
+    <Compile Include="Model\RestaurantsAndCustomersRating_finalEntity.cs" />
     <Compile Include="Model\RestaurantsCustomersGeoplaceEntity.cs" />
-    <Compile Include="ViewModel\RestaurantsAndConsumers16.10.2012.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="RestaurantsAndConsumersMainWindow.xaml.cs">
+      <DependentUpon>RestaurantsAndConsumersMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\RestaurantsAndConsumersViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="RestaurantsAndConsumersMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -98,6 +99,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Database\chefmozaccepts.csv" />
+    <None Include="Database\chefmozcuisine.csv" />
+    <None Include="Database\chefmozhours4.csv" />
+    <None Include="Database\chefmozparking.csv" />
+    <None Include="Database\geoplaces2.csv" />
+    <None Include="Database\rating_final.csv" />
+    <None Include="Database\usercuisine.csv" />
+    <None Include="Database\userpayment.csv" />
+    <None Include="Database\userprofile.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
