@@ -9,6 +9,6 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers.Model
     {
         public string Name { get; set; }
 
-        public int ID { get; set; }
+        public string ID { get; set; }
     }
 }

@@ -8,5 +8,6 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers.Model
     public class RestaurantCustomersUserProfileEntity : RestaurantCustomersEntity
     {
         public int Weight { get; set; }
+        
     }
 }

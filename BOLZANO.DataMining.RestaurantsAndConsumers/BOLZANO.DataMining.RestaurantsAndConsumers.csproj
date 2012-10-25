@@ -42,6 +42,9 @@
     <Reference Include="AsyncCtpLibrary">
       <HintPath>..\..\..\..\..\Desktop\AsyncCtpLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\..\..\..\..\..\Program Files\Prism4\Bin\Desktop\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Data" />

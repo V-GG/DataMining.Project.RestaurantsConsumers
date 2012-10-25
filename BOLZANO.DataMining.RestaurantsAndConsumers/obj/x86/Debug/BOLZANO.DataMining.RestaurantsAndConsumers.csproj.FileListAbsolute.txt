@@ -28,3 +28,5 @@ C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.Da
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.pdb
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\RestaurantsAndConsumersMainWindow.baml
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\RestaurantsAndConsumersMainWindow.g.cs
+C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\Microsoft.Practices.Prism.dll
+C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\Microsoft.Practices.ServiceLocation.dll

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using BOLZANO.DataMining.RestaurantsAndConsumers.Model;
 using Microsoft.VisualBasic.FileIO;
+using Microsoft.Practices.Prism.Commands;
 
 namespace BOLZANO.DataMining.RestaurantsAndConsumers
 {
@@ -17,6 +19,12 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
         private Dictionary<string, RestaurantsCustomersGeoplaceEntity> restaurants;
         private Dictionary<string, RestaurantCustomersUserProfileEntity> userProfiles;
         private Dictionary<string, RestaurantsAndCustomersRating_finalEntity> rating_finals;
+
+        private String userProfileWeightMedian;
+        private String userProfileWeightMean;
+        private String userProfileWeightMode;
+
+        private DelegateCommand calculateUsersWeightMedianCommand;
 
         public RestaurantsAndConsumersViewModel()
         {
@@ -40,12 +48,200 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
             }
         }
 
+        public Dictionary<string, RestaurantCustomersUserProfileEntity> UserProfiles
+        {
+            get
+            {
+                return userProfiles;
+            }
+
+            set
+            {
+                if (userProfiles != value)
+                {
+                    userProfiles = value;
+
+                    RaisePropertyChange(() => UserProfiles);
+                }
+            }
+        }
+
+        public DelegateCommand CalculateUsersWeightMedianCommand 
+        {
+            get
+            {
+                if (calculateUsersWeightMedianCommand == null)
+                {
+                    calculateUsersWeightMedianCommand = new DelegateCommand(CalculateUsersWeightMedian, CanCalculateUsersWeightMedian);
+                }
+
+                return calculateUsersWeightMedianCommand;
+            }
+        }
+
+        public String UserProfileWeightMedian 
+        {
+            get
+            {
+                return userProfileWeightMedian;
+            }
+            set
+            {
+                if (userProfileWeightMedian != value)
+                {
+                    userProfileWeightMedian = value;
+
+                    RaisePropertyChange(() => UserProfileWeightMedian);
+                }
+            }
+        }
+
+        public String UserProfileWeightMean 
+        {
+            get
+            {
+                return userProfileWeightMean;
+            }
+            set
+            {
+                if (userProfileWeightMean != value)
+                {
+                    userProfileWeightMean = value;
+
+                    RaisePropertyChange(() => UserProfileWeightMean);
+                }
+            }
+        }
+
+        public String UserProfileWeightMode
+        {
+            get
+            {
+                return userProfileWeightMode;
+            }
+            set
+            {
+                if (userProfileWeightMode != value)
+                {
+                    userProfileWeightMode = value;
+
+                    RaisePropertyChange(() => UserProfileWeightMode);
+                }
+            }
+        }
+
+        protected virtual bool CanCalculateUsersWeightMedian()
+        {
+            return true;
+        }
+
+        protected virtual void CalculateUsersWeightMedian()
+        {
+            if (UserProfiles != null)
+            {
+                ////Grouping the users by weights which deploys a list of frequencies which are defining how many ppl has a proper weight
+                var groupedWeights = (from userProfile in userProfiles
+                                     group userProfile by userProfile.Value.Weight into weights
+                                     let count = weights.Count()
+                                     orderby count
+                                     select new { Value = weights.Key, Count = count }).ToList();
+
+                ////Calculating the sum of all frequencies
+                //int frequencySum = groupedWeights.Sum( freq => freq.Count);
+                ////Calculate the average frequency
+                //int avgFrequency = frequencySum / groupedWeights.Count();
+                
+                var orderedUserProfilesByWeight = (from userProfile in UserProfiles
+                                                                         group userProfile by userProfile.Value.Weight into u  
+                                                                         orderby u.Key 
+                                                                         select u.Key).ToList();
+
+                int meadinIndex = orderedUserProfilesByWeight.Count/2;
+                UserProfileWeightMedian = string.Format("Median is: {0}", orderedUserProfilesByWeight[meadinIndex]);
+                UserProfileWeightMean = string.Format("Mean is: {0}", UserProfiles.Sum(userProfile => userProfile.Value.Weight) / UserProfiles.Count);
+                UserProfileWeightMode = string.Format("Mode is: {0}", groupedWeights.Last().Value);
+            }
+        }
+
+        private double MedianCalculation(int lowerBoundary, int countFreq, int lowerFrequencySum, int frequencySum, int width)
+        {
+            return ((lowerBoundary + countFreq - lowerFrequencySum) / frequencySum) * width;
+        }
+
+        #region The Selection Algorithm for finding the Median
+        private int Partition(List<int> list, int left, int right, int k)
+        {
+            int pivotValue = list[k];
+            int pom = list[pivotValue];
+            list[pivotValue] = list[right];
+            list[right] = pom;
+
+            int storeIndex = left;
+            for (int i = left; i < right - 1; i++)
+            {
+                if (list[i] <= pivotValue)
+                {
+                    pom = list[storeIndex];
+                    list[storeIndex] = list[i];
+                    list[i] = pom;
+                    storeIndex++;
+                }
+
+                pom = list[storeIndex];
+                list[storeIndex] = list[right];
+                list[right] = pom;
+
+                return storeIndex;
+            }
+
+            return 0;
+        }
+
+        private int SelectIndx(List<int> list, int left, int right, int k)
+        {
+            if (left == right) 
+                return left;
+
+            int pivotNewIndex = this.Partition(list, left, right, k);
+            int pivotDestination = pivotNewIndex - left + 1;
+
+            if (pivotDestination == k)
+                return pivotNewIndex;
+            else if (k < pivotDestination)
+            {
+                return SelectIndx(list, left, pivotNewIndex - 1, k);
+            }
+            else
+            {
+                return SelectIndx(list, pivotNewIndex + 1, right, k - pivotDestination);
+            }
+        }
+        
+        //return the median index into list
+        private int MedianBySelectionAlgorithm(List<int> list, int left, int right, int k)
+        {
+            int numMedians = (right - left) / 5;
+            for (int i = 0; i < numMedians; i++)
+            {
+                int subLeft = left + i * 5;
+                int subRight = subLeft + 5;
+
+                int medianIdx = this.SelectIndx(list, subLeft, subRight, 2);
+                int pom = i;
+                i = medianIdx;
+                medianIdx = pom;
+            }
+
+            return SelectIndx(list, left, left + numMedians, numMedians / 2);
+        }
+        #endregion
+
         private void ReadCSVFiles()
         {
             try
             {
                 Restaurants = new Dictionary<string, RestaurantsCustomersGeoplaceEntity>();
-                userProfiles = new Dictionary<string, RestaurantCustomersUserProfileEntity>();
+                UserProfiles = new Dictionary<string, RestaurantCustomersUserProfileEntity>();
                 rating_finals = new Dictionary<string, RestaurantsAndCustomersRating_finalEntity>();
 
                 #region Reading geoplaces2.csv
@@ -59,14 +255,12 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
                     //Processing row
                     RestaurantsCustomersGeoplaceEntity entity = new RestaurantsCustomersGeoplaceEntity();
                     string[] fields = restaurantsParser.ReadFields();
-                    int placeId;
                     float latitude;
                     long longtitude;
-                    Int32.TryParse(fields[0], out placeId);
                     float.TryParse(fields[1], out latitude);
                     long.TryParse(fields[2], out longtitude);
 
-                    entity.ID = placeId;
+                    entity.ID = fields[0];
                     entity.Latitutde = latitude;
                     entity.Longtitude = longtitude;
                     entity.The_geom_meter = fields[3];
@@ -97,6 +291,14 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
                     //Processing row
                     RestaurantCustomersUserProfileEntity entity = new RestaurantCustomersUserProfileEntity();
                     string[] fields = userProfilesParser.ReadFields();
+                    int weightInput;
+                    Int32.TryParse(fields[16], out weightInput);
+
+                    entity.ID = fields[0];
+                    entity.Name = string.Format("User {0}", fields[0]);
+                    entity.Weight = weightInput;
+
+                    UserProfiles.Add(fields[0], entity);
                 }
 
                 #endregion
@@ -121,40 +323,6 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
             {
 
             }
-        }
-
-        private int CalculateMean(KeyValuePair<string, string> tableAttributeInput)
-        {
-            //ToDo Write it dynamically choose table and attribute by the input
-            int countUserProfiles = 0;
-            int sumUsersWeight = 0;
-            foreach (var item in userProfiles)
-            {
-                countUserProfiles++;
-                sumUsersWeight += item.Value.Weight;
-            }
-
-            return sumUsersWeight / countUserProfiles;
-        }
-
-        private double CalculateMedianUserProfileWeight()
-        {
-
-            return 0.0;
-        }
-
-        //#region INotifyPropertyChanged Members
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //protected void OnPropertyChanged(string propertyName)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
-
-        //#endregion
+        }       
     }
 }
