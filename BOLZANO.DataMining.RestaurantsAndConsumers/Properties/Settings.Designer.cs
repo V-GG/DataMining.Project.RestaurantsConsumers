@@ -22,5 +22,44 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\ele\\Documents\\GitHub\\DataMining.Project.RestaurantsConsumers\\BOLZANO.Dat" +
+            "aMining.RestaurantsAndConsumers\\Database\\userprofile.csv")]
+        public string userProfilePath {
+            get {
+                return ((string)(this["userProfilePath"]));
+            }
+            set {
+                this["userProfilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\ele\\Documents\\GitHub\\DataMining.Project.RestaurantsConsumers\\BOLZANO.Dat" +
+            "aMining.RestaurantsAndConsumers\\Database\\geoplaces2.csv")]
+        public string geoplaces2Path {
+            get {
+                return ((string)(this["geoplaces2Path"]));
+            }
+            set {
+                this["geoplaces2Path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\ele\\Documents\\GitHub\\DataMining.Project.RestaurantsConsumers\\BOLZANO.Dat" +
+            "aMining.RestaurantsAndConsumers\\Database\\rating_final.csv")]
+        public string rating_finalPath {
+            get {
+                return ((string)(this["rating_finalPath"]));
+            }
+            set {
+                this["rating_finalPath"] = value;
+            }
+        }
     }
 }

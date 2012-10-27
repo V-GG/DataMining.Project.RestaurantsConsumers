@@ -5,16 +5,12 @@ using System.ComponentModel;
 using BOLZANO.DataMining.RestaurantsAndConsumers.Model;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Practices.Prism.Commands;
+using System.Diagnostics;
 
 namespace BOLZANO.DataMining.RestaurantsAndConsumers
 {
     public class RestaurantsAndConsumersViewModel : ContextBase
     {
-        //ToDo Change this hardcoded path.
-        private const string geoplaces2Path = @"C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\Database\geoplaces2.csv";
-        private const string userProfilePath = @"C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\Database\userprofile.csv";
-        private const string rating_finalPath = @"C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\Database\rating_final.csv";
-
         //The collections for loading the parsed data into the memmory
         private Dictionary<string, RestaurantsCustomersGeoplaceEntity> restaurants;
         private Dictionary<string, RestaurantCustomersUserProfileEntity> userProfiles;
@@ -23,8 +19,10 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
         private String userProfileWeightMedian;
         private String userProfileWeightMean;
         private String userProfileWeightMode;
+        private String userProfileFirstQuarterWeight;
+        private String userProfileThirdQuarterWeight;
 
-        private DelegateCommand calculateUsersWeightMedianCommand;
+        private DelegateCommand calculateUsersWeightSummaryCommand;
 
         public RestaurantsAndConsumersViewModel()
         {
@@ -66,16 +64,16 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
             }
         }
 
-        public DelegateCommand CalculateUsersWeightMedianCommand 
+        public DelegateCommand CalculateUsersWeightSummaryCommand 
         {
             get
             {
-                if (calculateUsersWeightMedianCommand == null)
+                if (calculateUsersWeightSummaryCommand == null)
                 {
-                    calculateUsersWeightMedianCommand = new DelegateCommand(CalculateUsersWeightMedian, CanCalculateUsersWeightMedian);
+                    calculateUsersWeightSummaryCommand = new DelegateCommand(CalculateUsersWeightSummary, CanCalculateUsersWeightSummary);
                 }
 
-                return calculateUsersWeightMedianCommand;
+                return calculateUsersWeightSummaryCommand;
             }
         }
 
@@ -130,39 +128,99 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
             }
         }
 
-        protected virtual bool CanCalculateUsersWeightMedian()
+        public String UserProfileFirstQuarterWeight 
+        {
+            get
+            {
+                return userProfileFirstQuarterWeight;
+            }
+            set
+            {
+                if (userProfileFirstQuarterWeight != value)
+                {
+                    userProfileFirstQuarterWeight = value;
+
+                    RaisePropertyChange(() => UserProfileFirstQuarterWeight);
+                }
+            }
+        }
+
+         public String UserProfileThirdQuarterWeight 
+        {
+            get
+            {
+                return userProfileThirdQuarterWeight;
+            }
+            set
+            {
+                if (userProfileThirdQuarterWeight != value)
+                {
+                    userProfileThirdQuarterWeight = value;
+
+                    RaisePropertyChange(() => UserProfileThirdQuarterWeight);
+                }
+            }
+        }
+
+        protected virtual bool CanCalculateUsersWeightSummary()
         {
             return true;
         }
 
-        protected virtual void CalculateUsersWeightMedian()
+        protected virtual void CalculateUsersWeightSummary()
         {
             if (UserProfiles != null)
             {
                 ////Grouping the users by weights which deploys a list of frequencies which are defining how many ppl has a proper weight
-                var groupedWeights = (from userProfile in userProfiles
+                var groupedWeights = (from userProfile in UserProfiles
                                      group userProfile by userProfile.Value.Weight into weights
                                      let count = weights.Count()
                                      orderby count
                                      select new { Value = weights.Key, Count = count }).ToList();
 
-                ////Calculating the sum of all frequencies
-                //int frequencySum = groupedWeights.Sum( freq => freq.Count);
-                ////Calculate the average frequency
-                //int avgFrequency = frequencySum / groupedWeights.Count();
-                
-                var orderedUserProfilesByWeight = (from userProfile in UserProfiles
-                                                                         group userProfile by userProfile.Value.Weight into u  
-                                                                         orderby u.Key 
-                                                                         select u.Key).ToList();
+                var listOfWeights = (from userProfile in UserProfiles
+                                     select userProfile.Value.Weight).ToList();
 
-                int meadinIndex = orderedUserProfilesByWeight.Count/2;
-                UserProfileWeightMedian = string.Format("Median is: {0}", orderedUserProfilesByWeight[meadinIndex]);
+                #region Median with Selection Algorithms
+
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+
+                int medianSelectionAlgorithmIndex = MedianBySelectionAlgorithm(listOfWeights, 0, listOfWeights.Count);
+
+                stopWatch.Stop();
+                
+                #endregion
+
+                stopWatch.Reset();
+
+                #region Median with sort algorithm
+
+                stopWatch.Start();
+
+                double median = this.GetMedian(listOfWeights.ToArray());
+
+                stopWatch.Stop();
+
+                #endregion
+
+                #region Calculating the 5 numbers summary
+
+                listOfWeights.Sort();
+
+                int quarter1UserProfilesWeight = listOfWeights[listOfWeights.Count / 4];
+                int quarter3UserProfilesWeight = listOfWeights[listOfWeights.Count * 3 / 4];
+                #endregion
+
+                UserProfileFirstQuarterWeight = string.Format("Q1 is: {0}", quarter1UserProfilesWeight);
+                UserProfileThirdQuarterWeight = string.Format("Q3 is: {0}", quarter3UserProfilesWeight);
+                UserProfileWeightMedian = string.Format("Median is: {0}", median);
                 UserProfileWeightMean = string.Format("Mean is: {0}", UserProfiles.Sum(userProfile => userProfile.Value.Weight) / UserProfiles.Count);
                 UserProfileWeightMode = string.Format("Mode is: {0}", groupedWeights.Last().Value);
             }
         }
 
+        //The formula for calculating media based on intervals of frequencies
         private double MedianCalculation(int lowerBoundary, int countFreq, int lowerFrequencySum, int frequencySum, int width)
         {
             return ((lowerBoundary + countFreq - lowerFrequencySum) / frequencySum) * width;
@@ -218,7 +276,7 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
         }
         
         //return the median index into list
-        private int MedianBySelectionAlgorithm(List<int> list, int left, int right, int k)
+        private int MedianBySelectionAlgorithm(List<int> list, int left, int right)
         {
             int numMedians = (right - left) / 5;
             for (int i = 0; i < numMedians; i++)
@@ -227,6 +285,7 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
                 int subRight = subLeft + 5;
 
                 int medianIdx = this.SelectIndx(list, subLeft, subRight, 2);
+                //??????????
                 int pom = i;
                 i = medianIdx;
                 medianIdx = pom;
@@ -234,6 +293,28 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
 
             return SelectIndx(list, left, left + numMedians, numMedians / 2);
         }
+        #endregion
+
+        #region Algorithms finding  median by sort
+
+        private double GetMedian(int[] sourceNumbers)
+        {
+              
+            if (sourceNumbers == null || sourceNumbers.Length == 0)
+                return 0D;
+
+            //make sure the list is sorted, but use a new array
+            int[] sortedPNumbers = (int[])sourceNumbers.Clone();
+            sourceNumbers.CopyTo(sortedPNumbers, 0);
+            Array.Sort(sortedPNumbers);
+
+            //get the median
+            int size = sortedPNumbers.Length;
+            int mid = size / 2;
+            double median = (size % 2 != 0) ? (double)sortedPNumbers[mid] : ((double)sortedPNumbers[mid] + (double)sortedPNumbers[mid - 1]) / 2;
+            return median;
+        }
+
         #endregion
 
         private void ReadCSVFiles()
@@ -246,7 +327,7 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
 
                 #region Reading geoplaces2.csv
 
-                TextFieldParser restaurantsParser = new TextFieldParser(geoplaces2Path);
+                TextFieldParser restaurantsParser = new TextFieldParser(Properties.Settings.Default["geoplaces2Path"].ToString());
                 restaurantsParser.TextFieldType = FieldType.Delimited;
                 restaurantsParser.SetDelimiters(",");
                 restaurantsParser.ReadFields();
@@ -282,7 +363,7 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
 
                 #region Reading user profiles
 
-                TextFieldParser userProfilesParser = new TextFieldParser(userProfilePath);
+                TextFieldParser userProfilesParser = new TextFieldParser(Properties.Settings.Default["userProfilePath"].ToString());
                 userProfilesParser.TextFieldType = FieldType.Delimited;
                 userProfilesParser.SetDelimiters(",");
                 userProfilesParser.ReadFields();
@@ -305,7 +386,7 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers
 
                 #region Reading ratings
 
-                TextFieldParser ratingsParser = new TextFieldParser(rating_finalPath);
+                TextFieldParser ratingsParser = new TextFieldParser(Properties.Settings.Default["rating_finalPath"].ToString());
                 ratingsParser.TextFieldType = FieldType.Delimited;
                 ratingsParser.SetDelimiters(",");
                 ratingsParser.ReadFields();

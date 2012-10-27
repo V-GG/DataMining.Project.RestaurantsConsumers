@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOLZANO.DataMining.RestaurantsAndConsumers", "BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers.csproj", "{D6A06127-CD49-4923-B7E9-4F699DEC181E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DataMining.Project.RestaurantsConsumers.Setup", "DataMining.Project.RestaurantsConsumers.Setup\DataMining.Project.RestaurantsConsumers.Setup.vdproj", "{0E12CE5B-76D8-45A9-BCF5-685322503249}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,8 @@ Global
 		{D6A06127-CD49-4923-B7E9-4F699DEC181E}.Debug|x86.Build.0 = Debug|x86
 		{D6A06127-CD49-4923-B7E9-4F699DEC181E}.Release|x86.ActiveCfg = Release|x86
 		{D6A06127-CD49-4923-B7E9-4F699DEC181E}.Release|x86.Build.0 = Release|x86
+		{0E12CE5B-76D8-45A9-BCF5-685322503249}.Debug|x86.ActiveCfg = Debug
+		{0E12CE5B-76D8-45A9-BCF5-685322503249}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

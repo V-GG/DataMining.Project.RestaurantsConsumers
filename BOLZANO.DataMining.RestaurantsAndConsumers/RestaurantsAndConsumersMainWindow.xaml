@@ -64,9 +64,11 @@
 
         <GroupBox Grid.Row="1" Margin="0,4,0,0" Header="Users Profile Weight Data Summarization">
             <StackPanel  Orientation="Vertical">
-                <Button  Content="Calculate users weight median,mode and mean" Command="{Binding CalculateUsersWeightMedianCommand}" />
+                <Button  Content="Calculate users weight median,mode and mean" Command="{Binding CalculateUsersWeightSummaryCommand}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding UserProfileWeightMedian}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileFirstQuarterWeight}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileThirdQuarterWeight}" />
                     <TextBlock Margin="8,0,0,0" Text="{Binding UserProfileWeightMean}" />
                     <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileWeightMode}" />
                 </StackPanel>
