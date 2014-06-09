@@ -38,6 +38,9 @@ D:\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.Restaurants
 D:\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.pdb
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 93f3265fb8a45f6a44d17bc23c4e655db0cb19bb
+=======
 >>>>>>> 93f3265fb8a45f6a44d17bc23c4e655db0cb19bb
 =======
 >>>>>>> 93f3265fb8a45f6a44d17bc23c4e655db0cb19bb
