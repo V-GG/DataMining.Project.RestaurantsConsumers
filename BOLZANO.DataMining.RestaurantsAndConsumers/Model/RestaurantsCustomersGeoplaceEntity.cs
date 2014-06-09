@@ -7,9 +7,9 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers.Model
 {
     public class RestaurantsCustomersGeoplaceEntity : RestaurantCustomersEntity
     {
-        public float Latitutde { get; set; }
+        public double Latitutde { get; set; }
 
-        public long Longtitude { get; set; }
+        public double Longtitude { get; set; }
 
         public string The_geom_meter { get; set; }
 

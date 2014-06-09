@@ -1,32 +1,17 @@
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\ResolveAssemblyReference.cache
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\App.g.cs
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers_MarkupCompile.cache
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.exe
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.pdb
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\MainWindow.g.cs
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers_MarkupCompile.lref
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\MainWindow.baml
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.g.resources
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.Properties.Resources.resources
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\GenerateResource.read.1.tlog
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\GenerateResource.write.1.tlog
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.exe
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.pdb
-c:\users\ele\documents\visual studio 2010\Projects\BOLZANO.DataMining.RestaurantsAndConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.exe.config
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.exe
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.pdb
+C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\Microsoft.Practices.Prism.dll
+C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\RestaurantsAndConsumersMainWindow.g.cs
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\App.g.cs
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers_MarkupCompile.cache
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers_MarkupCompile.lref
+C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\RestaurantsAndConsumersMainWindow.baml
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.g.resources
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.Properties.Resources.resources
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.exe
 C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\BOLZANO.DataMining.RestaurantsAndConsumers.pdb
-C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\RestaurantsAndConsumersMainWindow.baml
-C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\RestaurantsAndConsumersMainWindow.g.cs
-C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\Microsoft.Practices.Prism.dll
-C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\bin\Debug\Microsoft.Practices.ServiceLocation.dll

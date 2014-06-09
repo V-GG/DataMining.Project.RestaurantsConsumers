@@ -2,16 +2,17 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:BOLZANO.DataMining.RestaurantsAndConsumers"
-        Title="RestaurantsAndConsumersMainWindow" Height="800" Width="600">
+        Title="RestaurantsAndConsumersMainWindow" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -24,10 +25,17 @@
                       IsReadOnly="False"
                       ItemsSource="{Binding Restaurants}">
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Restaurant id">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Value.ID}" IsReadOnly="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Restaurant name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Value.Name}" IsReadOnly="True"/>
+                                <TextBox Text="{Binding Value.Name}" IsReadOnly="False"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -47,14 +55,28 @@
                     <DataGridTemplateColumn Header="UserProfile name">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Value.Name}" IsReadOnly="True"/>
+                                <TextBox Text="{Binding Value.Name}" IsReadOnly="False"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="UserProfile weight">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Value.Weight}" IsReadOnly="True"/>
+                                <TextBox Text="{Binding Value.Weight}" IsReadOnly="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="UserProfile height">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Value.Height}" IsReadOnly="False"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="UserProfile birth">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Value.BirthYear}" IsReadOnly="False"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -65,16 +87,158 @@
         <GroupBox Grid.Row="1" Margin="0,4,0,0" Header="Users Profile Weight Data Summarization">
             <StackPanel  Orientation="Vertical">
                 <Button  Content="Calculate users weight median,mode and mean" Command="{Binding CalculateUsersWeightSummaryCommand}" />
+                <Button Content="Run Apriory Algorithm" Command="{Binding RunAprioryAlgorithmCommand}" />
+                <Button Content="Run KMeans Algorithm" Command="{Binding RunKMeansAlgorithmCommand}" />
+                <Button Content="Run DBScan Algorithm" Command="{Binding RunDBScanAlgorithmCommand}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding UserProfileWeightMedian}" />
                     <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileFirstQuarterWeight}" />
                     <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileThirdQuarterWeight}" />
                     <TextBlock Margin="8,0,0,0" Text="{Binding UserProfileWeightMean}" />
                     <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileWeightMode}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileMinWeight}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileMaxWeight}" />
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        
+
+        <GroupBox Grid.Row="2" Margin="0,4,0,0" Header="Users Profile Height Data Summarization">
+            <StackPanel  Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding UserProfileHeightMedian}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileFirstQuarterHeight}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileThirdQuarterHeight}" />
+                    <TextBlock Margin="8,0,0,0" Text="{Binding UserProfileHeightMean}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileHeightMode}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileMinHeight}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileMaxHeight}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3" Margin="0,4,0,0" Header="Users Profile Birth Data Summarization">
+            <StackPanel  Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding UserProfileBirthYearMedian}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileFirstQuarterBirthYear}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileThirdQuarterBirthYear}" />
+                    <TextBlock Margin="8,0,0,0" Text="{Binding UserProfileBirthYearMean}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileBirthYearMode}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileMinBirthYear}" />
+                    <TextBlock Margin="8 ,0,0,0" Text="{Binding UserProfileMaxBirthYear}" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <Canvas Margin="20" Grid.RowSpan="4"  >
+            <Grid Visibility="{Binding AprioryAlgorithmVisibility, Mode=TwoWay}" Width="600" Height="300"  Canvas.Bottom="0" Canvas.Top="44" Canvas.Right="0" Canvas.Left="53" Background="White">
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="10" />
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Rectangle Fill="LightGray" />
+                <TextBlock  Margin="10,4,0,4"  Text="All the rated restaurants according to the Apriory Algorithm with threshold of 9" />
+                <DataGrid Grid.Row="1" AutoGenerateColumns="True"  ItemsSource="{Binding AprioryAlgorithmResult}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Item1}">
+                                        <!--<ListBoxItem Content="{Binding value}" />-->
+                                        
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="2" Content="Exit" Command="{Binding CloseAprioryResultPopupCommand}" />
+            </Grid>
+
+            <Grid Visibility="{Binding KMeansAlgorithmVisibility, Mode=TwoWay}" Width="600" Height="300"  Canvas.Bottom="0" Canvas.Top="44" Canvas.Right="0" Canvas.Left="53" Background="White">
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="10" />
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock  Margin="10,4,0,4"  Text="All the rated restaurants closed to each other devided into 10 clusters" />
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False"  ItemsSource="{Binding KMeansResult}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Item1}">
+                                        <!--<ListBoxItem Content="{Binding value}" />-->
+
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Item2}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="2" Content="Exit" Command="{Binding CloseKMeansResultPopupCommand}" />
+            </Grid>
+            
+            <Grid Visibility="{Binding DBScanAlgorithmVisibility, Mode=TwoWay}" Width="600" Height="300"  Canvas.Bottom="0" Canvas.Top="44" Canvas.Right="0" Canvas.Left="53" Background="White">
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="10" />
+                </Grid.Effect>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock  Margin="10,4,0,4"  Text="All the rated restaurants closed to each other generating clusters based on distance and number of points around a core point" />
+                <DataGrid SelectionMode="Extended" Grid.Row="1" AutoGenerateColumns="False"  ItemsSource="{Binding DBeansResult}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Item1}">
+                                        <!--<ListBoxItem Content="{Binding value}" />-->
+
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Item2}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="2" Content="Exit" Command="{Binding CloseDBScanResultPopupCommand}" />
+            </Grid>
+        </Canvas>
         
     </Grid>
 </Window>
