@@ -9,7 +9,8 @@ namespace BOLZANO.DataMining.RestaurantsAndConsumers.Model
     {
         No_Alcohol_Served,
         Wine_Beer,
-        Full_Bar
+        Full_Bar,
+        Dinner
     }
 
     public enum Smoking_area

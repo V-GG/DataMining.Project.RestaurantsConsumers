@@ -4,16 +4,21 @@
 winexe
 C#
 .cs
-C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\
+D:\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\obj\x86\Debug\
 BOLZANO.DataMining.RestaurantsAndConsumers
 none
 false
 DEBUG;TRACE
-C:\Users\ele\Documents\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\App.xaml
+D:\GitHub\DataMining.Project.RestaurantsConsumers\BOLZANO.DataMining.RestaurantsAndConsumers\App.xaml
 1-935530692
 
+<<<<<<< HEAD
 17-292399396
 15-1453352427
+=======
+12-1521867762
+16-1475633733
+>>>>>>> 93f3265fb8a45f6a44d17bc23c4e655db0cb19bb
 RestaurantsAndConsumersMainWindow.xaml;
 
 False
